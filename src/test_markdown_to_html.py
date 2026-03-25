@@ -47,6 +47,42 @@ the **same** even with inline stuff
             "<div><h1>This is a heading</h1></div>",
         )
 
+    def test_quotes(self):
+        md = "> This is a quote"
+
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><blockquote>This is a quote</blockquote></div>",
+        )
+
+    def test_ulists(self):
+        md = """
+- First item
+- Second item
+"""
+
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><ul><li>First item</li><li>Second item</li></ul></div>",
+        )
+
+    def test_olists(self):
+        md = """
+1. First item
+2. Second item
+"""
+
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><ol><li>First item</li><li>Second item</li></ol></div>",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

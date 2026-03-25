@@ -1,14 +1,14 @@
-from markdown_blocks import block_to_block_type
+from markdown_to_html import markdown_to_html_node
 
 
 def main():
-    # block = "###### This is a heading"
-    block = """\
-1. Ha decadas em que nada acontece
-2. e ha semanas em que decadas acontecem\
+    md = """
+> This is a
+>block quote
 """
-    block_type = block_to_block_type(block)
-    print(block_type)
+
+    root = markdown_to_html_node(md)
+    print(root.to_html())
 
 
 main()
