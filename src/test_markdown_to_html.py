@@ -38,49 +38,60 @@ the **same** even with inline stuff
         )
 
     def test_headings(self):
-        md = "# This is a heading"
+        md = """
+# **Heading** level 1
+
+## _Heading_ level 2
+
+### `Heading` level 3
+"""
 
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><h1>This is a heading</h1></div>",
+            "<div><h1><b>Heading</b> level 1</h1><h2><i>Heading</i> level 2</h2><h3><code>Heading</code> level 3</h3></div>",
         )
 
     def test_quotes(self):
-        md = "> This is a quote"
+        md = """
+> This is a quote
+> with inline **bold**, _italic_ and `code` text
+"""
 
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><blockquote>This is a quote</blockquote></div>",
+            "<div><blockquote>This is a quote with inline <b>bold</b>, <i>italic</i> and <code>code</code> text</blockquote></div>",
         )
 
     def test_ulists(self):
         md = """
-- First item
-- Second item
+- **Bold** text
+- _Italic_ text
+- Inline `code`
 """
 
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><ul><li>First item</li><li>Second item</li></ul></div>",
+            "<div><ul><li><b>Bold</b> text</li><li><i>Italic</i> text</li><li>Inline <code>code</code></li></ul></div>",
         )
 
     def test_olists(self):
         md = """
-1. First item
-2. Second item
+1. **Bold** text
+2. _Italic_ text
+3. Inline `code`
 """
 
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><ol><li>First item</li><li>Second item</li></ol></div>",
+            "<div><ol><li><b>Bold</b> text</li><li><i>Italic</i> text</li><li>Inline <code>code</code></li></ol></div>",
         )
 
 
