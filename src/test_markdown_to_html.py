@@ -1,6 +1,6 @@
 import unittest
 
-from markdown_to_html import markdown_to_html_node
+from markdown_to_html import extract_title, markdown_to_html_node
 
 
 class TestMarkdownToHTML(unittest.TestCase):
@@ -93,6 +93,17 @@ the **same** even with inline stuff
             html,
             "<div><ol><li><b>Bold</b> text</li><li><i>Italic</i> text</li><li>Inline <code>code</code></li></ol></div>",
         )
+
+    def test_extract_title(self):
+        md = """
+# Tolkien Fan Club
+
+![JRR Tolkien sitting](/images/tolkien.png)
+
+Here's the deal, **I like Tolkien**.
+"""
+        title = extract_title(md)
+        self.assertEqual(title, "Tolkien Fan Club")
 
 
 if __name__ == "__main__":
